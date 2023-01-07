@@ -30,7 +30,7 @@ public class TransitionManager : Singletion<TransitionManager>,ISaveable
         if(!ifNow)
             EventHandler.CallBeforeSceneChangeEvent();
         yield return Fade(1);
-        if(from!=string.Empty)
+        if(from!=string.Empty&&from!= "Persistent")
         {
             yield return SceneManager.UnloadSceneAsync(from);
         }

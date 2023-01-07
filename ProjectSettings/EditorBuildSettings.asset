@@ -8,5 +8,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Persistent.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/H1.unity
+    guid: a44df024a88627c49af8b544310b305e
+  - enabled: 1
+    path: Assets/Scenes/H2.unity
+    guid: 638c43ee8c0fa424cae9546b115c4fa8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 86768519bed7960419c28035284f307d, type: 2}
