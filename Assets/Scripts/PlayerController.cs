@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 
 namespace playerController
 {
@@ -20,14 +20,20 @@ namespace playerController
         public Vector2 groundCheckSize;
         private Vector3 colliderSize, colliderPosition;
         private Collider2D[] colliders;
-        public bool isOnGround;
+        [SerializeField]
+        private bool isOnGround;
+        [Header("移动")]
+        public float moveSpeedUp;//加速度
+        public float moveSpeedMax;//最大速度
+        public float moveSpeedDecay;//减速度
         [Header("冲刺")]
         [Tooltip("最大冲刺次数")]
         public int dashCountMax;
         private int dashCount;
         private Vector2 dashDirection;//之后改为private
-        private Vector2 DashCurrentSpeed;
+        private Vector2 dashCurrentSpeed;
         private Vector2 playerCurrentSpeed;
+        private Vector2 moveCurrentSpeed;
         private dashState dashStateNow;
         private int dashNowFrame;
         [Header("冲刺过程运动调整")]
@@ -41,15 +47,8 @@ namespace playerController
         [Header("空气阻力")]
         public int dashSpeedDecayFrame;
         public float dashSpeedDecay;
-        [Header("是否防止卡墙里")]
-        public bool isCloseToEdge;
-        public bool isNoSpeedUpWhenTouchEdge;
-        private CapsuleCollider2D capsuleCollider;
-        [Range(0f, 1f)]
-        public float edgeCheckSize;
         private Rigidbody2D rb2d;
-        private Vector2 nextPosOffset;
-        public bool isUseMovePostion;
+
 
 
         enum dashState
@@ -62,7 +61,6 @@ namespace playerController
         private void Awake()
         {
             rb2d = GetComponent<Rigidbody2D>();
-            capsuleCollider = GetComponent<CapsuleCollider2D>();
         }
         // Start is called before the first frame update
         void Start()
@@ -73,10 +71,51 @@ namespace playerController
         // Update is called once per frame
         void Update()
         {
-
+            OnGroundCheck();
+            ResetDashCountOnGround();
+        }
+        private void FixedUpdate()
+        {
+            OnGroundCheck();
+            HandleGravity();
+            DashMoveHandle();
+            InputSystem.Update();
+            Move();
+            MoveDecay();
+            MoveHandle();
+        }
+        #region 跳跃
+        // 跳跃设计为向上冲刺
+        public void Jump()
+        {
+            Dash(Vector2.up);
+        }
+        #endregion
+        #region 移动
+        public void MoveDirGet(InputAction.CallbackContext value)
+        {
+             moveDir = value.ReadValue<float>();
         }
 
-
+        private float moveDir; 
+       private void Move()
+        {
+            moveCurrentSpeed.x += moveDir * moveSpeedUp;
+            moveCurrentSpeed.x = Mathf.Clamp(moveCurrentSpeed.x, -moveSpeedMax,moveSpeedMax);
+        }
+        private void MoveDecay()
+        { 
+           if(moveCurrentSpeed.x!=0 && moveDir==0)
+            {
+                int sign = moveCurrentSpeed.x>0 ? 1 : -1;
+                moveCurrentSpeed.x -= sign * moveSpeedDecay;
+                if(moveCurrentSpeed.x * sign < 0)
+                {
+                    moveCurrentSpeed.x = 0;
+                }
+            }
+        }
+        #endregion
         #region 重力
         //处理重力
         private void HandleGravity()
@@ -102,7 +141,7 @@ namespace playerController
                 dashDirection = _dashDireciton;
                 dashNowFrame = 0;
                 dashStateNow = dashState.speedUp;
-                DashCurrentSpeed = Vector2.zero;
+                dashCurrentSpeed = Vector2.zero;
             }
         }
         private void DashMoveHandle()
@@ -117,7 +156,7 @@ namespace playerController
         }
         private void DashSpeedup()
         {
-            DashCurrentSpeed += dashDirection.normalized * dashSpeed;
+            dashCurrentSpeed += dashDirection.normalized * dashSpeed;
             if (++dashNowFrame > dashSpeedUpFrame)
             {
                 dashStateNow = dashState.staySpeed;
@@ -135,7 +174,7 @@ namespace playerController
         }
         private void DashSpeedDecay()//空气阻力 施加运动方向相反的力
         {
-            DashCurrentSpeed -= DashCurrentSpeed.normalized * dashSpeedDecay;
+            dashCurrentSpeed -= dashCurrentSpeed.normalized * dashSpeedDecay;
             if (++dashNowFrame > dashSpeedDecayFrame)
             {
                 dashStateNow = dashState.noDash;
@@ -144,8 +183,65 @@ namespace playerController
         }
         private void DashSpeedStop()
         {
-            DashCurrentSpeed = new Vector2(0, 0);
+            dashCurrentSpeed = new Vector2(0, 0);
         }
+        #endregion
+        #region 位置处理
+        //处理速度
+        private void MoveHandle()
+        {
+            //Debug.Log(playerCurrentSpeed);
+            playerCurrentSpeed = dashCurrentSpeed + GravityCurrentSpeed + moveCurrentSpeed;
+            Vector2 nowPos = transform.position;
+            rb2d.MovePosition(playerCurrentSpeed + nowPos);
+            //rb2d.velocity = playerCurrentSpeed;
+            Vector2 pos = transform.position;
+            Debug.DrawLine(transform.position, pos + dashCurrentSpeed * 10, Color.red);
+        }
+        #endregion
+        #region 冲刺次数相关
+        private bool ResetDashCountOnGround()
+        {
+            if (isOnGround && dashStateNow != dashState.speedUp)
+            {
+                ResetDashCount();
+                return true;
+            }
+            return false;
+        }
+        public int ResetDashCount()
+        {
+            dashCount = dashCountMax;
+            return dashCount;
+        }
+        #endregion
+        #region 地面检测
+        bool OnGroundCheck()
+        {
+            Vector2 pos = transform.position;
+            colliderPosition = groundCheckPos + pos;
+            colliderSize = groundCheckSize;
+            LayerMask ignoreMask = ~(1 << playerMask);
+            colliders = Physics2D.OverlapBoxAll(colliderPosition, colliderSize, 0, ignoreMask);
+            if (colliders.Length != 0)
+            {
+                isOnGround = true;
+                return true;
+            }
+            else
+            {
+                isOnGround = false;
+                return false;
+            }
+        }
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            //Vector2 showSize = new Vector2(colliderSize.x * 2, colliderSize.y);
+            Gizmos.DrawWireCube(colliderPosition, colliderSize);
+        }
+#endif
+        
         #endregion
     }
 }
