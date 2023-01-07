@@ -7,6 +7,8 @@ public enum GameState
 public enum SceneName
 {
     Persistent,
-    H1,
-    H2,
+    Level1,
+    Level1_A,
+    Level2,
+    Level2_A,
 }

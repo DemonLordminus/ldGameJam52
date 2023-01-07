@@ -4,15 +4,17 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
-public class GameManager : Singletion<GameManager>,ISaveable
+public class GameManager : Singletion<GameManager>, ISaveable
 {
     public float gameTime;
     public GameObject timer;
     public GameObject menu;
     public Light2D globalLight;
+    public int Level;
 
     private void Start()
     {
+        MenuReset();
         ISaveable saveable = this;
         saveable.SaveableRegister();
     }
@@ -39,7 +41,8 @@ public class GameManager : Singletion<GameManager>,ISaveable
 
     public void MenuReset()
     {
-       
+        menu.transform.GetChild(0).gameObject.SetActive(true);
+        menu.transform.GetChild(1).gameObject.SetActive(false);
     }
 
     public void Timer(float time)

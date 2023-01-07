@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,12 @@ public class TransitionManager : Singletion<TransitionManager>,ISaveable
         saveable.SaveableRegister();
     }
 
+    public void Select(string level)
+    {
+        if (!isFade && canTransition)
+            StartCoroutine(TransitionToScene(SceneManager.GetActiveScene().name, level, false));
+    }
+
     public void Transition(string from,string to,bool ifNow)
     {
         if(!isFade&&canTransition)
@@ -30,7 +37,7 @@ public class TransitionManager : Singletion<TransitionManager>,ISaveable
         if(!ifNow)
             EventHandler.CallBeforeSceneChangeEvent();
         yield return Fade(1);
-        if(from!=string.Empty&&from!= "Persistent")
+        if(from!=string.Empty&&from!="Persistent")
         {
             yield return SceneManager.UnloadSceneAsync(from);
         }

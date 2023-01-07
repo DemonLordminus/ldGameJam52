@@ -1,10 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace playerController
 {
-    public class PlayerController : MonoBehaviour
+    public class Player : Character
     {
         [Header("ÖØÁ¦")]
         public bool isEnableGravity;
@@ -241,7 +242,29 @@ namespace playerController
             Gizmos.DrawWireCube(colliderPosition, colliderSize);
         }
 #endif
-        
+
         #endregion
+
+        public override void ResetCharacter()
+        {
+
+        }
+
+        public override IEnumerator DamageCharacter(int damage, float interval)
+        {
+            yield return null;  
+        }
+
+        public override void TriggerEvent(Collider2D collsion)
+        {
+            switch (collsion.gameObject.tag)
+            {
+                case "Teleport":
+                    var teleport = collsion.gameObject.GetComponent<Teleport>();
+                    teleport?.TeleportToScene();
+                    break;
+            }
+        }
     }
+
 }
