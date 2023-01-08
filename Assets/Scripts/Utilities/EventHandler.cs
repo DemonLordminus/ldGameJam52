@@ -32,6 +32,12 @@ public static class EventHandler
     {
         AfterSceneChangeEvent?.Invoke();
     }
+
+    public static event Action<ItemDetails,int> UpdateUIEvent;
+    public static void CallUpdateUIEvent(ItemDetails itemDetails,int amount)
+    {
+        UpdateUIEvent?.Invoke(itemDetails,amount);
+    }
 }
 
 

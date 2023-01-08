@@ -33,6 +33,8 @@ public class GameManager : Singletion<GameManager>, ISaveable
     private void OnBeforeSceneChangeEvent()
     {
         MenuReset();
+        menu.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     private void Start()
@@ -53,8 +55,11 @@ public class GameManager : Singletion<GameManager>, ISaveable
         {
             if (menu.activeInHierarchy)
             {
+                Time.timeScale = 1f;
                 MenuReset();
             }
+            else
+                Time.timeScale = 0f;
             menu.SetActive(!menu.activeInHierarchy);
         }
     }

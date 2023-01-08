@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -49,7 +50,8 @@ namespace playerController
         public int dashSpeedDecayFrame;
         public float dashSpeedDecay;
         private Rigidbody2D rb2d;
-
+        [Header("ºÏ≤‚æ‡¿Î")]
+        public float distance;
 
 
         enum dashState
@@ -72,24 +74,20 @@ namespace playerController
         // Update is called once per frame
         void Update()
         {
+            OnGroundCheck();
+            ResetDashCountOnGround();
             if (!isPause)
-            {
-                OnGroundCheck();
-                ResetDashCountOnGround();
-            }
+                HitCheck();
         }
         private void FixedUpdate()
         {
-            if (!isPause)
-            {
-                OnGroundCheck();
-                HandleGravity();
-                DashMoveHandle();
-                InputSystem.Update();
-                Move();
-                MoveDecay();
-                MoveHandle();
-            }
+            OnGroundCheck();
+            HandleGravity();
+            DashMoveHandle();
+            InputSystem.Update();
+            Move();
+            MoveDecay();
+            MoveHandle();
         }
         #region Ã¯‘æ
         // Ã¯‘æ…Ëº∆Œ™œÚ…œ≥Â¥Ã
@@ -101,22 +99,22 @@ namespace playerController
         #region “∆∂Ø
         public void MoveDirGet(InputAction.CallbackContext value)
         {
-             moveDir = value.ReadValue<float>();
+            moveDir = value.ReadValue<float>();
         }
 
-        private float moveDir; 
-       private void Move()
+        private float moveDir;
+        private void Move()
         {
             moveCurrentSpeed.x += moveDir * moveSpeedUp;
-            moveCurrentSpeed.x = Mathf.Clamp(moveCurrentSpeed.x, -moveSpeedMax,moveSpeedMax);
+            moveCurrentSpeed.x = Mathf.Clamp(moveCurrentSpeed.x, -moveSpeedMax, moveSpeedMax);
         }
         private void MoveDecay()
-        { 
-           if(moveCurrentSpeed.x!=0 && moveDir==0)
+        {
+            if (moveCurrentSpeed.x != 0 && moveDir == 0)
             {
-                int sign = moveCurrentSpeed.x>0 ? 1 : -1;
+                int sign = moveCurrentSpeed.x > 0 ? 1 : -1;
                 moveCurrentSpeed.x -= sign * moveSpeedDecay;
-                if(moveCurrentSpeed.x * sign < 0)
+                if (moveCurrentSpeed.x * sign < 0)
                 {
                     moveCurrentSpeed.x = 0;
                 }
@@ -258,7 +256,7 @@ namespace playerController
 
         public override IEnumerator DamageCharacter(int damage, float interval)
         {
-            yield return null;  
+            yield return null;
         }
 
         public override void TriggerEvent(Collider2D collsion)
@@ -299,6 +297,27 @@ namespace playerController
         {
             yield return new WaitForSeconds(time);
             rb2d.velocity = Vector2.zero;
+        }
+
+
+        public void HitCheck()
+        {
+            //int layerMask = 7;
+            //layerMask = ~layerMask;
+            if (Input.GetKey(KeyCode.D))
+                direction = new Vector2(1, 0);
+            else if(Input.GetKey(KeyCode.A))
+                direction = new Vector2(-1,0);
+            
+            if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Return))
+            {
+                RaycastHit2D hit = Physics2D.Raycast(rb2d.position, direction, distance, LayerMask.GetMask("Default"));
+                if (hit.collider != null && hit.collider.gameObject.tag == "Item")
+                {
+                    var item = hit.collider.gameObject.GetComponent<Item>();
+                    item?.ItemClick();
+                }
+            }
         }
     }
 

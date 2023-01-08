@@ -184,6 +184,7 @@ MonoBehaviour:
   dashSpeedStayFrame: 2
   dashSpeedDecayFrame: 7
   dashSpeedDecay: 0.2
+  distance: 0.5
 --- !u!50 &2382386104866417873
 Rigidbody2D:
   serializedVersion: 4

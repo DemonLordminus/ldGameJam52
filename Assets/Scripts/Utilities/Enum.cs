@@ -14,3 +14,8 @@ public enum SceneName
     Start,
 }
 
+public enum ItemName
+{
+    Stone,
+}
+
