@@ -291,7 +291,7 @@ namespace playerController
             }
             if(dashStateNow == dashState.speedDecay)
             {
-                return LockState(AnimJumpDown,0.5f);
+                return LockState(AnimJumpDown,0.2f);
             }
             if(isOnGround==false)
             {
