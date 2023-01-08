@@ -4,40 +4,34 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TransitionManager : Singletion<TransitionManager>,ISaveable
+public class TransitionManager : Singletion<TransitionManager>, ISaveable
 {
     public SceneName startScene;
 
     public CanvasGroup fadeCanvasGroup;
     public float fadeDuration;
-    private bool isFade;
-    private bool canTransition=true;
+    public bool isFade;
+    private bool canTransition = true;
 
     private void Start()
     {
-        StartCoroutine(TransitionToScene("Persistent",startScene.ToString(),false));
+        StartCoroutine(TransitionToScene("Persistent", startScene.ToString(), false));
         ISaveable saveable = this;
         saveable.SaveableRegister();
     }
 
-    public void Select(string level)
+    public void Transition(string from, string to, bool ifNow)
     {
         if (!isFade && canTransition)
-            StartCoroutine(TransitionToScene(SceneManager.GetActiveScene().name, level, false));
+            StartCoroutine(TransitionToScene(from, to, ifNow));
     }
 
-    public void Transition(string from,string to,bool ifNow)
+    private IEnumerator TransitionToScene(string from, string to, bool ifNow)
     {
-        if(!isFade&&canTransition)
-            StartCoroutine(TransitionToScene(from, to,ifNow));
-    }
-
-    private IEnumerator TransitionToScene(string from,string to,bool ifNow)
-    {
-        if(!ifNow)
+        if (!ifNow)
             EventHandler.CallBeforeSceneChangeEvent();
         yield return Fade(1);
-        if(from!=string.Empty&&from!="Persistent")
+        if (from != string.Empty && from != "Persistent")
         {
             yield return SceneManager.UnloadSceneAsync(from);
         }
@@ -60,9 +54,9 @@ public class TransitionManager : Singletion<TransitionManager>,ISaveable
         isFade = true;
 
         fadeCanvasGroup.blocksRaycasts = true;
-        float speed=Mathf.Abs(fadeCanvasGroup.alpha-targetAlpha)/fadeDuration;
+        float speed = Mathf.Abs(fadeCanvasGroup.alpha - targetAlpha) / fadeDuration;
 
-        while(!Mathf.Approximately(fadeCanvasGroup.alpha,targetAlpha))
+        while (!Mathf.Approximately(fadeCanvasGroup.alpha, targetAlpha))
         {
             fadeCanvasGroup.alpha = Mathf.MoveTowards(fadeCanvasGroup.alpha, targetAlpha, speed * Time.deltaTime);
             yield return null;
@@ -70,7 +64,7 @@ public class TransitionManager : Singletion<TransitionManager>,ISaveable
 
         fadeCanvasGroup.blocksRaycasts = false;
 
-        isFade=false;
+        isFade = false;
     }
 
     public GameSaveData GenerateSaveData()
@@ -83,6 +77,7 @@ public class TransitionManager : Singletion<TransitionManager>,ISaveable
     public void RestoreGameData(GameSaveData saveData)
     {
         bool ifNow = SceneManager.GetActiveScene().name == saveData.currentScene;
-        Transition(SceneManager.GetActiveScene().name, saveData.currentScene,ifNow);
+        Transition(SceneManager.GetActiveScene().name, saveData.currentScene, ifNow);
     }
+
 }

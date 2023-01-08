@@ -305,7 +305,7 @@ MonoBehaviour:
   timer: {fileID: 774372682}
   menu: {fileID: 898912174}
   globalLight: {fileID: 619394801}
-  Level: 0
+  Level: Level1
 --- !u!1 &387122544
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,14 +733,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2002067762}
-        m_TargetAssemblyTypeName: TransitionManager, Assembly-CSharp
+      - m_Target: {fileID: 898912179}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: Select
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: Level2
           m_BoolArgument: 0
@@ -2283,8 +2283,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2002067762}
-        m_TargetAssemblyTypeName: TransitionManager, Assembly-CSharp
+      - m_Target: {fileID: 898912179}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: Select
         m_Mode: 5
         m_Arguments:
@@ -2453,9 +2453,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad3e74db6fa44040a8a14455aa6f4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScene: 1
+  startScene: 5
   fadeCanvasGroup: {fileID: 1395978267}
   fadeDuration: 0.5
+  isFade: 0
 --- !u!1 &2108111363
 GameObject:
   m_ObjectHideFlags: 0

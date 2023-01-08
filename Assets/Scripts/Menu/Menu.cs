@@ -4,17 +4,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Menu : Singletion<Menu>
+public class Menu : MonoBehaviour
 {
+    public void Select(string level)
+    {
+        GameManager.Instance.Level = level;
+        GameManager.Instance.ifStart = true;
+        TransitionManager.Instance.Transition(SceneManager.GetActiveScene().name, level, false);
+    }
+
     public void Restart()
     {
-        GameManager.Instance.MenuReset();
-        EventHandler.CallStartNewGameEvent(GameManager.Instance.Level);
+        GameManager.Instance.ifStart = true;
+        TransitionManager.Instance.Transition(SceneManager.GetActiveScene().name, GameManager.Instance.Level, false);
     }
 
     public void Back()
     {
-        GameManager.Instance.MenuReset();
         TransitionManager.Instance.Transition(SceneManager.GetActiveScene().name, "Start", false);
     }
 
@@ -27,11 +33,4 @@ public class Menu : Singletion<Menu>
         #endif
     }
 
-    public void ContinueGame(int index)
-    {
-        GameManager.Instance.MenuReset();
-        SaveLoadManager.Instance.Load(index);
-        Time.timeScale = 1;
-        this.gameObject.SetActive(false);
-    }
 }

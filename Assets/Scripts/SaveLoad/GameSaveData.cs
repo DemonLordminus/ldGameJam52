@@ -13,11 +13,4 @@ public class GameSaveData
     public float globalLightColorG;
     public float globalLightColorB;
     public float globalLightColorA;
-
-    public Dictionary<string, int> dialogueIndex = new Dictionary<string, int>();
-
-    public bool flashlightActive;
-    public float originalspeed;
-    public bool ifBrain;
-
 }

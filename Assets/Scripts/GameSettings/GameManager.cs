@@ -10,7 +10,30 @@ public class GameManager : Singletion<GameManager>, ISaveable
     public GameObject timer;
     public GameObject menu;
     public Light2D globalLight;
-    public int Level;
+    public string Level;
+    public bool ifStart;
+
+    private void OnEnable()
+    {
+        EventHandler.BeforeSceneChangeEvent += OnBeforeSceneChangeEvent;
+        EventHandler.AfterSceneChangeEvent += OnAfterSceneChangeEvent;
+    }
+
+    private void OnDisable()
+    {
+        EventHandler.BeforeSceneChangeEvent -= OnBeforeSceneChangeEvent;
+        EventHandler.AfterSceneChangeEvent -= OnAfterSceneChangeEvent;
+    }
+
+    private void OnAfterSceneChangeEvent()
+    {
+        menu.SetActive(false);
+    }
+
+    private void OnBeforeSceneChangeEvent()
+    {
+        MenuReset();
+    }
 
     private void Start()
     {
@@ -30,11 +53,8 @@ public class GameManager : Singletion<GameManager>, ISaveable
         {
             if (menu.activeInHierarchy)
             {
-                Time.timeScale = 1;
                 MenuReset();
             }
-            else
-                Time.timeScale = 0;
             menu.SetActive(!menu.activeInHierarchy);
         }
     }

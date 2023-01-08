@@ -72,18 +72,24 @@ namespace playerController
         // Update is called once per frame
         void Update()
         {
-            OnGroundCheck();
-            ResetDashCountOnGround();
+            if (!isPause)
+            {
+                OnGroundCheck();
+                ResetDashCountOnGround();
+            }
         }
         private void FixedUpdate()
         {
-            OnGroundCheck();
-            HandleGravity();
-            DashMoveHandle();
-            InputSystem.Update();
-            Move();
-            MoveDecay();
-            MoveHandle();
+            if (!isPause)
+            {
+                OnGroundCheck();
+                HandleGravity();
+                DashMoveHandle();
+                InputSystem.Update();
+                Move();
+                MoveDecay();
+                MoveHandle();
+            }
         }
         #region 跳跃
         // 跳跃设计为向上冲刺
@@ -264,6 +270,35 @@ namespace playerController
                     teleport?.TeleportToScene();
                     break;
             }
+        }
+
+        private void OnEnable()
+        {
+            EventHandler.GameStateChangedEvent += OnGameStateChangedEvent;
+        }
+
+        private void OnDisable()
+        {
+            EventHandler.GameStateChangedEvent -= OnGameStateChangedEvent;
+        }
+
+        private bool isPause;
+        private void OnGameStateChangedEvent(GameState gameState)
+        {
+            isPause = gameState switch
+            {
+                GameState.GamePlay => false,
+                GameState.Pause => true,
+                _ => false,
+            };
+            if (isPause)
+                StartCoroutine(delay(0.5f));
+        }
+
+        IEnumerator delay(float time)
+        {
+            yield return new WaitForSeconds(time);
+            rb2d.velocity = Vector2.zero;
         }
     }
 

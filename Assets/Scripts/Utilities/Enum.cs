@@ -11,4 +11,6 @@ public enum SceneName
     Level1_A,
     Level2,
     Level2_A,
+    Start,
 }
+

@@ -17,20 +17,25 @@ public class SaveLoadManager : Singletion<SaveLoadManager>
 
     private void OnEnable()
     {
-        EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+        EventHandler.AfterSceneChangeEvent += OnAfterSceneChangeEvent;
     }
 
     private void OnDisable()
     {
-        EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+        EventHandler.AfterSceneChangeEvent -= OnAfterSceneChangeEvent;
     }
 
-    private void OnStartNewGameEvent(int obj)
+    private void OnAfterSceneChangeEvent()
     {
-        var resultPath = jsonFolder + "data.sav";
-        if(File.Exists(resultPath))
+        string level = GameManager.Instance.Level;
+        var resultPath = jsonFolder + ("data{0}.sav",level);
+        if (GameManager.Instance.ifStart)
         {
-            File.Delete(resultPath);
+            if (File.Exists(resultPath))
+                Load(level);
+            else
+                Save(level);
+            GameManager.Instance.ifStart = false;
         }
     }
 
@@ -39,7 +44,7 @@ public class SaveLoadManager : Singletion<SaveLoadManager>
         saveableList.Add(saveable);
     }
 
-    public void Save(int index)
+    public void Save(string index)
     {
         saveDataDict.Clear();
 
@@ -60,7 +65,7 @@ public class SaveLoadManager : Singletion<SaveLoadManager>
         File.WriteAllText(resultPath,jsonData);
     }
 
-    public void Load(int index)
+    public void Load(string index)
     {
         var resultPath = jsonFolder + ("data{0}.sav",index);
 
