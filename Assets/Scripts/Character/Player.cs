@@ -319,6 +319,8 @@ namespace playerController
             yield return null;
         }
 
+        [Header("ŒÔÃÂ≈–∂®")]
+        public ItemName currentItem;
         public override void TriggerEvent(Collider2D collsion)
         {
             switch (collsion.gameObject.tag)
@@ -372,10 +374,22 @@ namespace playerController
             if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Return))
             {
                 RaycastHit2D hit = Physics2D.Raycast(rb2d.position, direction, distance, LayerMask.GetMask("Default"));
-                if (hit.collider != null && hit.collider.gameObject.tag == "Item")
+                if (hit.collider != null)
                 {
-                    var item = hit.collider.gameObject.GetComponent<Item>();
-                    item?.ItemClick();
+                    switch (hit.collider.gameObject.tag )
+                    {
+                        case "Item":
+                            var item = hit.collider.gameObject.GetComponent<Item>();
+                            item?.ItemClick();
+                            break;
+                        case "Interactive":
+                            var interactive = hit.collider.gameObject.GetComponent<Interactive>();
+                            if (holdItem)
+                                interactive?.CheckItem(currentItem);
+                            else
+                                interactive?.EmptyAction();
+                            break;
+                    }
                 }
             }
         }
