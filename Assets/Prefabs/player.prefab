@@ -167,25 +167,26 @@ MonoBehaviour:
   startingHitPoints: 0
   maxHitPoints: 0
   holdItem: 0
-  direction: {x: 0, y: 0}
+  direction: {x: -1, y: 0}
   characterCategory: 0
   isEnableGravity: 1
-  PlayerGravity: 0.1
+  PlayerGravity: 0.2
   PlayerGravitySpeedMax: 0.2
   playerMask: 8
   groundCheckPos: {x: 0.02, y: -0.4}
   groundCheckSize: {x: 0.15, y: 0.2}
-  isOnGround: 0
+  isOnGround: 1
   moveSpeedUp: 0.1
-  moveSpeedMax: 0.2
+  moveSpeedMax: 0.15
   moveSpeedDecay: 0.1
   dashCountMax: 1
   dashSpeedUpFrame: 2
-  dashSpeed: 0.2
-  dashSpeedStayFrame: 2
-  dashSpeedDecayFrame: 7
-  dashSpeedDecay: 0.2
+  dashSpeed: 0.15
+  dashSpeedStayFrame: 9
+  dashSpeedDecayFrame: 5
+  dashSpeedDecay: 0.25
   distance: 0.5
+  isJumpPress: 0
   currentItem: 1
 --- !u!50 &2382386104866417873
 Rigidbody2D:
