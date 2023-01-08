@@ -8,6 +8,7 @@ public class Item : MonoBehaviour
 
     public void ItemClick()
     {
+        ObjectManager.Instance.ItemChange(gameObject);
         InventoryManager.Instance.AddItem(itemName);
         this.gameObject.SetActive(false);
     }
