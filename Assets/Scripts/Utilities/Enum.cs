@@ -17,5 +17,6 @@ public enum SceneName
 public enum ItemName
 {
     Stone,
+    None
 }
 

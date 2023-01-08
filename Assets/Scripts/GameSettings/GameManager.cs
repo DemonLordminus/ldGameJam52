@@ -1,3 +1,4 @@
+using playerController;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,22 +13,40 @@ public class GameManager : Singletion<GameManager>, ISaveable
     public Light2D globalLight;
     public string Level;
     public bool ifStart;
+    public Player player;
 
     private void OnEnable()
     {
         EventHandler.BeforeSceneChangeEvent += OnBeforeSceneChangeEvent;
         EventHandler.AfterSceneChangeEvent += OnAfterSceneChangeEvent;
+        EventHandler.UpdateUIEvent += OnUpdateUIEvent;
     }
 
     private void OnDisable()
     {
         EventHandler.BeforeSceneChangeEvent -= OnBeforeSceneChangeEvent;
         EventHandler.AfterSceneChangeEvent -= OnAfterSceneChangeEvent;
+        EventHandler.UpdateUIEvent -= OnUpdateUIEvent;
+    }
+
+    private void OnUpdateUIEvent(ItemDetails itemDetails, int amount)
+    {
+        if (itemDetails == null)
+        {
+            player.holdItem = false;
+            player.currentItem=ItemName.None;
+        }
+        else
+        {
+            player.holdItem = true;
+            player.currentItem = itemDetails.itemName;
+        }
     }
 
     private void OnAfterSceneChangeEvent()
     {
         menu.SetActive(false);
+        player = FindObjectOfType<Player>();
     }
 
     private void OnBeforeSceneChangeEvent()
