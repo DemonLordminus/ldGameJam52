@@ -3,10 +3,10 @@ using UnityEngine;
 
 public static class EventHandler
 {
-    public static event Action<int> StartNewGameEvent;
-    public static void CallStartNewGameEvent(int gameWeek)
+    public static event Action<string> StartNewGameEvent;
+    public static void CallStartNewGameEvent(string level)
     {
-        StartNewGameEvent?.Invoke(gameWeek);
+        StartNewGameEvent?.Invoke(level);
     }
 
     public static event Action<string> ShowDialogueEvent;
@@ -37,6 +37,12 @@ public static class EventHandler
     public static void CallUpdateUIEvent(ItemDetails itemDetails,int amount)
     {
         UpdateUIEvent?.Invoke(itemDetails,amount);
+    }
+
+    public static event Action<ItemName> ItemUsedEvent;
+    public static void CallItemUsedEvent(ItemName itemName)
+    {
+        ItemUsedEvent?.Invoke(itemName);
     }
 }
 

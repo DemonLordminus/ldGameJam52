@@ -7,6 +7,5 @@ public class Reset : MonoBehaviour
     public int level;
     private void Awake()
     {
-        EventHandler.CallStartNewGameEvent(level);
     }
 }

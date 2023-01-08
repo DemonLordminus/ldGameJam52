@@ -28,7 +28,7 @@ public class SaveLoadManager : Singletion<SaveLoadManager>
     private void OnAfterSceneChangeEvent()
     {
         string level = GameManager.Instance.Level;
-        var resultPath = jsonFolder + ("data{0}.sav",level);
+        var resultPath = jsonFolder + ("data{0}.sav", level);
         if (GameManager.Instance.ifStart)
         {
             if (File.Exists(resultPath))
@@ -36,6 +36,7 @@ public class SaveLoadManager : Singletion<SaveLoadManager>
             else
                 Save(level);
             GameManager.Instance.ifStart = false;
+            EventHandler.CallStartNewGameEvent(level);
         }
     }
 

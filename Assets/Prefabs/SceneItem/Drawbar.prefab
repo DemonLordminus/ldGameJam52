@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8329046488646912170}
   - component: {fileID: 8698725155355089510}
   - component: {fileID: 2479626463311609369}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Drawbar
   m_TagString: Interactive
   m_Icon: {fileID: 0}

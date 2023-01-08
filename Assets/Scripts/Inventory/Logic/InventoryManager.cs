@@ -18,16 +18,19 @@ public class InventoryManager : Singletion<InventoryManager>
     private void OnEnable()
     {
         EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+        EventHandler.ItemUsedEvent += OnItemUsedEvent;
     }
 
     private void OnDisable()
     {
         EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+        EventHandler.ItemUsedEvent -= OnItemUsedEvent;
     }
 
-    private void OnStartNewGameEvent(int obj)
+    private void OnStartNewGameEvent(string level)
     {
         itemCountDict.Clear();
+        EventHandler.CallUpdateUIEvent(null, -1);
     }
 
     private void OnItemUsedEvent(ItemName itemName)

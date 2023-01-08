@@ -11,16 +11,18 @@ public class Interactive : MonoBehaviour
     public GameObject confiner;
     private SpriteRenderer spriteRenderer;
 
-    private void Start()
+    private void Awake()
     {
-        spriteRenderer=GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite=normal;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = normal;
     }
 
     public virtual void CheckItem(ItemName itemName)
     {
         if (itemName == requireItem && !isDone)
         {
+            if (requireItem != ItemName.None)
+                EventHandler.CallItemUsedEvent(itemName);
             isDone = true;
             OnAction();
         }
@@ -39,9 +41,16 @@ public class Interactive : MonoBehaviour
     {
         if (requireItem == ItemName.None)
         {
-            OnAction(); 
+            isDone = true;
+            OnAction();
             return;
         }
         Debug.Log("¿Õµã");
+    }
+
+    public void Check()
+    {
+        if (isDone)
+            OnAction();
     }
 }

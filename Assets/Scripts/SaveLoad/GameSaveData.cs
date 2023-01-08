@@ -13,4 +13,6 @@ public class GameSaveData
     public float globalLightColorG;
     public float globalLightColorB;
     public float globalLightColorA;
+
+    public Dictionary<string, bool> itemActiveDict = new Dictionary<string, bool>();
 }

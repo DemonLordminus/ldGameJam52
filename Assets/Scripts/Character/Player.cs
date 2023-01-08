@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace playerController
 {
@@ -341,6 +342,10 @@ namespace playerController
                     var teleport = collsion.gameObject.GetComponent<Teleport>();
                     teleport?.TeleportToScene();
                     break;
+                case "Dead":
+                    GameManager.Instance.ifStart = true;
+                    TransitionManager.Instance.Transition(SceneManager.GetActiveScene().name, GameManager.Instance.Level, false);
+                    break;
             }
         }
 
@@ -385,7 +390,7 @@ namespace playerController
             
             if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.Return))
             {
-                RaycastHit2D hit = Physics2D.Raycast(rb2d.position, direction, distance, LayerMask.GetMask("Default"));
+                RaycastHit2D hit = Physics2D.Raycast(rb2d.position, direction, distance, LayerMask.GetMask("Interactive"));
                 if (hit.collider != null)
                 {
                     switch (hit.collider.gameObject.tag )
