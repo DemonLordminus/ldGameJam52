@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -2076463384, guid: 203506f4eb4407a4ca525d0648e3660d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -173,8 +173,8 @@ MonoBehaviour:
   PlayerGravity: 0.1
   PlayerGravitySpeedMax: 0.2
   playerMask: 8
-  groundCheckPos: {x: 0, y: -0.4}
-  groundCheckSize: {x: 1, y: 0.2}
+  groundCheckPos: {x: 0.02, y: -0.4}
+  groundCheckSize: {x: 0.15, y: 0.2}
   isOnGround: 0
   moveSpeedUp: 0.1
   moveSpeedMax: 0.2
@@ -244,7 +244,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.48, y: 0.86}
   m_Direction: 0
 --- !u!95 &7527084531374712745
 Animator:
