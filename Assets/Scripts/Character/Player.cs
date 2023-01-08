@@ -52,7 +52,9 @@ namespace playerController
         private Rigidbody2D rb2d;
         [Header("检测距离")]
         public float distance;
-
+        
+        //动画部分
+        private Animator animator;
 
         enum dashState
         {
@@ -64,6 +66,7 @@ namespace playerController
         private void Awake()
         {
             rb2d = GetComponent<Rigidbody2D>();
+            animator = GetComponent<Animator>();
         }
         // Start is called before the first frame update
         void Start()
@@ -88,6 +91,7 @@ namespace playerController
             Move();
             MoveDecay();
             MoveHandle();
+            AnimChange();
         }
         #region 跳跃
         // 跳跃设计为向上冲刺
@@ -248,7 +252,63 @@ namespace playerController
 #endif
 
         #endregion
+        #region 动画处理
+        private static readonly int AnimIdle = Animator.StringToHash("PlayerIDLE");
+        private static readonly int AnimMove = Animator.StringToHash("PlayerMove");
+        private static readonly int AnimJumpUp = Animator.StringToHash("PlayerJumpUp");
+        private static readonly int AnimJumpStay = Animator.StringToHash("PlayerJumpStay");
+        private static readonly int AnimJumpDown = Animator.StringToHash("PlayerJumpDown");
 
+        private int currentState;
+        private float lockTill;
+        private int GetState()
+        {
+            if (Time.time < lockTill)
+            { 
+                return currentState;
+            }
+            if(dashStateNow == dashState.speedUp)
+            {
+                return AnimJumpUp;
+            }
+            if (dashStateNow == dashState.staySpeed)
+            {
+                return AnimJumpStay;
+            }
+            if(dashStateNow == dashState.speedDecay)
+            {
+                return LockState(AnimJumpDown,0.5f);
+            }
+            if(isOnGround==false)
+            {
+                return AnimJumpStay;
+            }
+            if(Mathf.Abs(moveCurrentSpeed.x)>0)
+            {
+                return AnimMove;
+            }
+            return AnimIdle;
+
+            int LockState(int state,float timeLock)
+            {
+                lockTill = Time.time + timeLock;
+                return state;
+            }
+        }
+        private void AnimChange()
+        {
+            var state = GetState();
+            if (state != currentState) 
+            {
+                animator.CrossFade(state, 0, 0);
+                currentState = state;
+            }
+            if (transform.localScale.x * moveCurrentSpeed.x < 0)
+            {
+                transform.localScale = new Vector3(transform.localScale.x*-1,transform.localScale.y,transform.localScale.z);
+            }
+        }
+        #endregion
         public override void ResetCharacter()
         {
 
