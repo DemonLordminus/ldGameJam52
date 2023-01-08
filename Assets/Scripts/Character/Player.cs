@@ -52,7 +52,9 @@ namespace playerController
         private Rigidbody2D rb2d;
         [Header("检测距离")]
         public float distance;
-        
+
+        [SerializeField]
+        private bool isJumpPress;
         //动画部分
         private Animator animator;
 
@@ -87,7 +89,8 @@ namespace playerController
             OnGroundCheck();
             HandleGravity();
             DashMoveHandle();
-            InputSystem.Update();
+            //InputSystem.Update();
+            JumpHandle();
             Move();
             MoveDecay();
             MoveHandle();
@@ -95,9 +98,20 @@ namespace playerController
         }
         #region 跳跃
         // 跳跃设计为向上冲刺
-        public void Jump()
+        public void Jump(InputAction.CallbackContext callback)
         {
-            Dash(Vector2.up);
+            if(callback.phase == InputActionPhase.Started)
+            {
+                isJumpPress = true;
+            } 
+        }
+        private void JumpHandle()
+        { 
+            if(isJumpPress)
+            {
+                Dash(Vector2.up);
+                isJumpPress = false;
+            }
         }
         #endregion
         #region 移动
