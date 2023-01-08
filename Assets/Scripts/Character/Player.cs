@@ -16,8 +16,7 @@ namespace playerController
         [Range(0f, 1f)]
         public float PlayerGravitySpeedMax;
         [Header("Åö×²Ìå")]
-        [Tooltip("Íæ¼ÒÍ¼²ãindex")]
-        public int playerMask;
+        public LayerMask CheckMask;
         public Vector2 groundCheckPos;
         public Vector2 groundCheckSize;
         private Vector3 colliderSize, colliderPosition;
@@ -52,7 +51,7 @@ namespace playerController
         private Rigidbody2D rb2d;
         [Header("¼ì²â¾àÀë")]
         public float distance;
-
+        
         [SerializeField]
         private bool isJumpPress;
         //¶¯»­²¿·Ö
@@ -244,8 +243,7 @@ namespace playerController
             Vector2 pos = transform.position;
             colliderPosition = groundCheckPos + pos;
             colliderSize = groundCheckSize;
-            LayerMask ignoreMask = ~(1 << playerMask);
-            colliders = Physics2D.OverlapBoxAll(colliderPosition, colliderSize, 0, ignoreMask);
+            colliders = Physics2D.OverlapBoxAll(colliderPosition, colliderSize, 0, CheckMask);
             if (colliders.Length != 0)
             {
                 isOnGround = true;

@@ -172,7 +172,9 @@ MonoBehaviour:
   isEnableGravity: 1
   PlayerGravity: 0.2
   PlayerGravitySpeedMax: 0.2
-  playerMask: 8
+  CheckMask:
+    serializedVersion: 2
+    m_Bits: 1
   groundCheckPos: {x: 0.02, y: -0.4}
   groundCheckSize: {x: 0.15, y: 0.2}
   isOnGround: 1
