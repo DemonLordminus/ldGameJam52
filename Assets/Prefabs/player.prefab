@@ -134,9 +134,9 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2382386104866417886}
-        m_TargetAssemblyTypeName: playerController.PlayerController, Assembly-CSharp
+        m_TargetAssemblyTypeName: playerController.Player, Assembly-CSharp
         m_MethodName: Jump
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
