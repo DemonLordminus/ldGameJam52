@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 60d99e8c542098140a62e1a776ad8e90
+guid: 06d877534e7e1de44b70aca19892792e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,316 +105,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: floor_haru_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d97bc652ed1b074ba33bdbdbf9fd670
-      internalID: 287883356
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: floor_haru_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 420d55e07280cd5499adf9e70526e17c
-      internalID: -166574170
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: floor_haru_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78e82e57ee42089439c3e8a012bc7ece
-      internalID: 271741083
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: floor_haru_A_1
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ddfe40304897dea48b5f851249146c69
-      internalID: -1508596807
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: floor_haru_B_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b38d071c05c9c244d8c1b5060b581779
-      internalID: -2101407706
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: floor_haru_3
+      name: pubu-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 32
-        width: 32
+        width: 96
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b69eb47e0c8f0648b14b0b61b116f5b
-      internalID: 49014590
+      spriteID: 7338b599efc89724b869315375ff06a1
+      internalID: -601136987
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floor_haru_4
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2a796f7ce261c5c41ac1e0fe69c8c737
-      internalID: 1630108279
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: floor_haru_5
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd828ff5510d665488f37f717c6f0dbd
-      internalID: -1508613298
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: floor_haru_A_2
+      name: pubu-Sheet_1
       rect:
         serializedVersion: 2
         x: 96
         y: 32
-        width: 32
+        width: 96
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f919a01d96456f4dbb3fc0aaad9623e
-      internalID: -175187111
+      spriteID: 08f898281e412eb4e8c68cb9795ff450
+      internalID: 1848644240
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floor_haru_B_2
+      name: pubu-Sheet_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 192
         y: 32
-        width: 32
+        width: 96
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d984197233c43f4598e73aa5c93698e
-      internalID: -2100800594
+      spriteID: d768d1b44c1ff514eadb5c73e0de79b4
+      internalID: -469072667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floor_haru_6
+      name: pubu-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 32
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc252e4bcd2f6244ebe5d1dffe0bdc7c
+      internalID: -1818957734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pubu-Sheet_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
+        width: 96
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 584c408f3aa2d0346a677e42ff9744cb
-      internalID: 155589843
+      spriteID: 90f9742de5f232549b5fd7ce3f806919
+      internalID: -1350810259
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floor_haru_7
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 74f3829873848ae45bc96617a67b7306
-      internalID: 1436131871
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: floor_haru_8
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 775bb3f56e52d5d4ebe83f2615169fe5
-      internalID: -440448102
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: floor_haru_A_3
+      name: pubu-Sheet_5
       rect:
         serializedVersion: 2
         x: 96
         y: 0
-        width: 32
+        width: 96
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5e238524385eef47ac6c503b0242e2e
-      internalID: 29835138
+      spriteID: ea38520e56263294fb2cb3cc1e8fb325
+      internalID: 1255556073
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: floor_haru_B_3
+      name: pubu-Sheet_6
       rect:
         serializedVersion: 2
-        x: 128
+        x: 192
         y: 0
-        width: 32
+        width: 96
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f505bd78a9962c4a9f327455a20aea3
-      internalID: 102253424
+      spriteID: 4606b1e160922774bb794f7eb67271fd
+      internalID: -272891658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pubu-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b15294fb0dd07d41a751416fe68cefc
+      internalID: 914364657
       vertices: []
       indices: 
       edges: []
@@ -430,21 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      floor_haru_A_1: -1508596807
-      floor_haru_8: -440448102
-      floor_haru_5: -1508613298
-      floor_haru_3: 49014590
-      floor_haru_B_1: -2101407706
-      floor_haru_B_2: -2100800594
-      floor_haru_2: 271741083
-      floor_haru_7: 1436131871
-      floor_haru_0: 287883356
-      floor_haru_A_3: 29835138
-      floor_haru_B_3: 102253424
-      floor_haru_4: 1630108279
-      floor_haru_A_2: -175187111
-      floor_haru_6: 155589843
-      floor_haru_1: -166574170
+      pubu-Sheet_1: 1848644240
+      pubu-Sheet_3: -1818957734
+      pubu-Sheet_5: 1255556073
+      pubu-Sheet_6: -272891658
+      pubu-Sheet_7: 914364657
+      pubu-Sheet_4: -1350810259
+      pubu-Sheet_2: -469072667
+      pubu-Sheet_0: -601136987
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
