@@ -17,15 +17,15 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler, IPointerEnterHandler, 
         currentItem = itemDetails;
         this.gameObject.SetActive(true);
         itemImage.sprite=itemDetails.itemSprite;
-        itemImage.SetNativeSize();
-        itemAmount.gameObject.SetActive(true);
-        itemAmount.UpdateItemAmount(amount);
+        //itemImage.SetNativeSize();
+        //itemAmount.gameObject.SetActive(true);
+        //itemAmount.UpdateItemAmount(amount);
     }
 
     public void SetEmpty()
     {
         this.gameObject.SetActive(false);
-        itemAmount.gameObject.SetActive(false);
+        //itemAmount.gameObject.SetActive(false);
     }
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)

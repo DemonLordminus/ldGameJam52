@@ -8,7 +8,7 @@ public class Fruit : Item
 
     public override void ItemClick()
     {
-        TransitionManager.Instance.amount+=1;
+        TransitionManager.Instance.amount+=3;
         TransitionManager.Instance.AmountChange();
         this.gameObject.SetActive(false);
     }
