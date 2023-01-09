@@ -10,11 +10,17 @@ public class Interactive : MonoBehaviour
     public Sprite done;
     public GameObject confiner;
     private SpriteRenderer spriteRenderer;
+    private Tip tip;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = normal;
+        try
+        {
+            tip = gameObject.transform.GetChild(0).gameObject.GetComponent<Tip>();
+        }
+        catch { }
     }
 
     public virtual void CheckItem(ItemName itemName)
@@ -35,6 +41,7 @@ public class Interactive : MonoBehaviour
     {
         confiner.SetActive(false);
         spriteRenderer.sprite=done;
+        tip.gameObject.SetActive(false);
     }
 
     public virtual void EmptyAction()

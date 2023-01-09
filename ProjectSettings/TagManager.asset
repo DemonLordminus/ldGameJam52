@@ -9,6 +9,7 @@ TagManager:
   - Interactive
   - Confiner
   - Dead
+  - Event
   layers:
   - Default
   - TransparentFX

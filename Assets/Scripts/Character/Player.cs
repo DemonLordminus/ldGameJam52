@@ -346,7 +346,17 @@ namespace playerController
                     GameManager.Instance.ifStart = true;
                     TransitionManager.Instance.Transition(SceneManager.GetActiveScene().name, GameManager.Instance.Level, false);
                     break;
+                case "Event":
+                    var _event = collsion.gameObject.GetComponent<Event>();
+                    _event?.EventAction();
+                    break;
             }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            var _event = collision.gameObject.GetComponent<Event>();
+            _event?.EventAction();
         }
 
         private void OnEnable()
