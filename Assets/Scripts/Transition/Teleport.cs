@@ -9,6 +9,8 @@ public class Teleport : MonoBehaviour
 
     public void TeleportToScene()
     {
+        GameManager.Instance.Level = sceneToGO.ToString();
+        GameManager.Instance.ifStart = true;
         TransitionManager.Instance.Transition(sceneFrom.ToString(), sceneToGO.ToString(), false);
     }
 }

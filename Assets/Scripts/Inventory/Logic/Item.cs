@@ -6,7 +6,7 @@ public class Item : MonoBehaviour
 {
     public ItemName itemName;
 
-    public void ItemClick()
+    public virtual void ItemClick()
     {
         ObjectManager.Instance.ItemChange(gameObject);
         InventoryManager.Instance.AddItem(itemName);

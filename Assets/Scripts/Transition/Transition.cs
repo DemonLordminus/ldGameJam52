@@ -9,8 +9,11 @@ public class Transition : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKeyUp(KeyCode.Q) && TransitionManager.Instance.amount > 0)
+        {
+            TransitionManager.Instance.amount --;
             TeleportToScene();
+        }
     }
 
     public void TeleportToScene()

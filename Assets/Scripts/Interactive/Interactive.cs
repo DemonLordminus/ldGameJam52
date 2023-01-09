@@ -48,7 +48,7 @@ public class Interactive : MonoBehaviour
         Debug.Log("¿Õµã");
     }
 
-    public void Check()
+    public virtual void Check()
     {
         if (isDone)
             OnAction();

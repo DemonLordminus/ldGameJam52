@@ -15,11 +15,14 @@ public class GameManager : Singletion<GameManager>, ISaveable
     public string Level;
     public bool ifStart;
     public Player player;
+    public ItemDetails details;
+    public int itemAmount;
 
     private void OnEnable()
     {
         EventHandler.BeforeSceneChangeEvent += OnBeforeSceneChangeEvent;
         EventHandler.AfterSceneChangeEvent += OnAfterSceneChangeEvent;
+        EventHandler.StartNewGameEvent += OnStartNewGameEvent;
         EventHandler.UpdateUIEvent += OnUpdateUIEvent;
     }
 
@@ -27,27 +30,43 @@ public class GameManager : Singletion<GameManager>, ISaveable
     {
         EventHandler.BeforeSceneChangeEvent -= OnBeforeSceneChangeEvent;
         EventHandler.AfterSceneChangeEvent -= OnAfterSceneChangeEvent;
+        EventHandler.StartNewGameEvent += OnStartNewGameEvent;
         EventHandler.UpdateUIEvent -= OnUpdateUIEvent;
+    }
+
+    private void OnStartNewGameEvent(string obj)
+    {
+        details = null;
+        itemAmount = 0;
     }
 
     private void OnUpdateUIEvent(ItemDetails itemDetails, int amount)
     {
-        if (itemDetails == null)
+        try
         {
-            player.holdItem = false;
-            player.currentItem=ItemName.None;
+            if (itemDetails == null)
+            {
+                player.holdItem = false;
+                player.currentItem = ItemName.None;
+                details = null;
+            }
+            else
+            {
+                player.holdItem = true;
+                player.currentItem = itemDetails.itemName;
+                details = itemDetails;
+                itemAmount = amount;
+            }
         }
-        else
-        {
-            player.holdItem = true;
-            player.currentItem = itemDetails.itemName;
-        }
+        catch { }
     }
 
     private void OnAfterSceneChangeEvent()
     {
         menu.SetActive(false);
         player = FindObjectOfType<Player>();
+        if(player != null)
+            EventHandler.CallUpdateUIEvent(details, itemAmount);
     }
 
     private void OnBeforeSceneChangeEvent()

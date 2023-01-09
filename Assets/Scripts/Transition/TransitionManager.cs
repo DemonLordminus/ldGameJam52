@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TransitionManager : Singletion<TransitionManager>, ISaveable
 {
@@ -12,6 +13,51 @@ public class TransitionManager : Singletion<TransitionManager>, ISaveable
     public float fadeDuration;
     public bool isFade;
     private bool canTransition = true;
+    public int amount;
+    public int level1Amount;
+    public int level2Amount;
+    public Image tp;
+    public Text tpText;
+
+    private void OnEnable()
+    {
+        EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+        EventHandler.AfterSceneChangeEvent += OnAfterSceneChangeEvent;
+    }
+
+    private void OnDisable()
+    {
+        EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+        EventHandler.AfterSceneChangeEvent += OnAfterSceneChangeEvent;
+    }
+
+    private void OnAfterSceneChangeEvent()
+    {
+        try
+        {
+            if (amount == 0)
+            {
+                tp.color = Color.gray;
+                tpText.text = "无法传送";
+            }
+            else
+            {
+                AmountChange();
+            }
+        }
+        catch { }
+    }
+
+    public void AmountChange()
+    {
+        tp.color = Color.white;
+        tpText.text = "可传送次数" + " : " + amount;
+    }
+
+    private void OnStartNewGameEvent(string level)
+    {
+        amount = level switch { "Level1" => level1Amount, "Level2" => level2Amount, _ => 0 };
+    }
 
     private void Start()
     {
