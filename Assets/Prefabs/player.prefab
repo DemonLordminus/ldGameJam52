@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2382386104866417882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06, y: -0.084, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -167,26 +167,27 @@ MonoBehaviour:
   startingHitPoints: 0
   maxHitPoints: 0
   holdItem: 0
-  direction: {x: -1, y: 0}
+  direction: {x: 1, y: 0}
   characterCategory: 0
   isEnableGravity: 1
-  PlayerGravity: 0.2
-  PlayerGravitySpeedMax: 0.2
+  PlayerGravity: 0.01
+  PlayerGravitySpeedMax: 0.5
   CheckMask:
     serializedVersion: 2
     m_Bits: 1
-  groundCheckPos: {x: 0.02, y: -0.4}
-  groundCheckSize: {x: 0.15, y: 0.2}
+  groundCheckPos: {x: 0.02, y: 0.06}
+  groundCheckSize: {x: 0.15, y: 0.13}
   isOnGround: 1
-  moveSpeedUp: 0.1
-  moveSpeedMax: 0.15
-  moveSpeedDecay: 0.1
+  moveSpeedUp: 0.07
+  moveSpeedMax: 0.12
+  moveSpeedDecay: 0.12
   dashCountMax: 1
-  dashSpeedUpFrame: 2
-  dashSpeed: 0.15
-  dashSpeedStayFrame: 9
-  dashSpeedDecayFrame: 5
-  dashSpeedDecay: 0.25
+  dashSpeedUpFrame: 10
+  dashSpeed: 0.075
+  dashSpeedUpSlow: 0.01
+  dashSpeedStayFrame: 1
+  dashSpeedDecayFrame: 10
+  dashSpeedDecay: 0.1
   distance: 0.5
   isJumpPress: 0
   currentItem: 1
@@ -246,8 +247,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.48, y: 0.86}
+  m_Offset: {x: 0, y: 0.4}
+  m_Size: {x: 0.5, y: 0.8}
   m_Direction: 0
 --- !u!95 &7527084531374712745
 Animator:
