@@ -40,10 +40,13 @@ namespace playerController
         private int dashNowFrame;
         [Header("冲刺过程运动调整")]
         [Header("冲刺加速")]
-        [Tooltip("冲刺加速的帧率")]
+        [Tooltip("冲刺加速的帧数")]
         public int dashSpeedUpFrame;//冲刺加速的帧率
+        private float dashSpeedNowUp;
         [Tooltip("每帧加速的速度")]
         public float dashSpeed;//每帧加速的速度
+        [Header("冲刺加速度递减")]
+        public float dashSpeedUpSlow;
         [Header("速度保持状态")]
         public int dashSpeedStayFrame;
         [Header("空气阻力")]
@@ -103,7 +106,12 @@ namespace playerController
             if(callback.phase == InputActionPhase.Started)
             {
                 isJumpPress = true;
-            } 
+            }
+            if (callback.phase == InputActionPhase.Canceled && dashStateNow == dashState.speedUp)
+            {
+                dashStateNow = dashState.staySpeed;
+                dashNowFrame = 0;
+            }
         }
         private void JumpHandle()
         { 
@@ -165,6 +173,7 @@ namespace playerController
                 dashNowFrame = 0;
                 dashStateNow = dashState.speedUp;
                 dashCurrentSpeed = Vector2.zero;
+                dashSpeedNowUp = dashSpeed;
             }
         }
         private void DashMoveHandle()
@@ -179,7 +188,9 @@ namespace playerController
         }
         private void DashSpeedup()
         {
-            dashCurrentSpeed += dashDirection.normalized * dashSpeed;
+            GravityCurrentSpeed = Vector2.zero;
+            dashCurrentSpeed += dashDirection.normalized * dashSpeedNowUp;
+            dashSpeedNowUp -= dashSpeedUpSlow;
             if (++dashNowFrame > dashSpeedUpFrame)
             {
                 dashStateNow = dashState.staySpeed;
@@ -189,6 +200,13 @@ namespace playerController
 
         private void DashSpeedStay()
         {
+            //dashCurrentSpeed = dashDirection.normalized * dashSpeedNowUp;
+            //dashSpeedNowUp += GravityCurrentSpeed.y;
+            //if (dashSpeedNowUp < 0)
+            //{
+            //    dashSpeedNowUp = 0;
+            //}
+            GravityCurrentSpeed = Vector2.zero;
             if (++dashNowFrame > dashSpeedStayFrame)
             {
                 dashStateNow = dashState.speedDecay;
