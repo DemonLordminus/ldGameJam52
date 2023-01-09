@@ -38,7 +38,7 @@ public class Tip : Event
                 Coroutine = StartCoroutine(UpdatePos());
             return;
         }
-        controller.ShowDialogueEmpty();
+        controller.ShowDialogueItem();
         if (Coroutine != null)
         {
             StopCoroutine(Coroutine);
