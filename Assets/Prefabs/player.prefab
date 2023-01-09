@@ -182,7 +182,7 @@ MonoBehaviour:
   moveSpeedMax: 0.12
   moveSpeedDecay: 0.12
   dashCountMax: 1
-  dashSpeedUpFrame: 10
+  dashSpeedUpFrame: 7
   dashSpeed: 0.075
   dashSpeedUpSlow: 0.01
   dashSpeedStayFrame: 1
